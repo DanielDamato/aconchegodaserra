@@ -12,7 +12,7 @@ $Vai 		= "Nome: $remet\n\nE-mail: $email_remet\n\nTelefone: $fone_remet\n\nCelul
 
 require_once("PHPMailer/class.phpmailer.php");
 
-define('GUSER', 'danieldamato88@gmail.com');	// <-- Insira aqui o seu GMail
+define('GUSER', 'daniel.damato88@gmail.com');	// <-- Insira aqui o seu GMail
 define('GPWD', 'daniel31');		// <-- Insira aqui a senha do seu GMail
 
 function smtpmailer($para, $de, $de_nome, $assunto, $corpo) { 
@@ -42,7 +42,7 @@ function smtpmailer($para, $de, $de_nome, $assunto, $corpo) {
 // Insira abaixo o email que irá receber a mensagem, o email que irá enviar (o mesmo da variável GUSER), 
 //o nome do email que envia a mensagem, o Assunto da mensagem e por último a variável com o corpo do email.
 
- if (smtpmailer('danieldamato88@gmail.com', 'danieldamato88@gmail.com', 'Site-ACC', 'Mensagem do Site', $Vai)) {
+ if (smtpmailer('daniel.damato88@gmail.com', 'daniel.damato88@gmail.com', 'Site-ACC', 'Mensagem do Site', $Vai)) {
 
 	Header("location:https://danieldamato.github.io/aconchegodaserra/"); // Redireciona para uma página de obrigado.
 
