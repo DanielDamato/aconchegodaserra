@@ -10,7 +10,7 @@ $corpo 			= $_POST[corpo_mail];
 
 $Vai 		= "Nome: $remet\n\nE-mail: $email_remet\n\nTelefone: $fone_remet\n\nCelular: $cel_remet\n\nAssunto: $assunto\n\nMensagem: $corpo\n";
 
-require_once("phpmailer/class.phpmailer.php");
+require_once("PHPMailer/class.phpmailer.php");
 
 define('GUSER', 'danieldamato88@gmail.com');	// <-- Insira aqui o seu GMail
 define('GPWD', 'daniel31');		// <-- Insira aqui a senha do seu GMail
