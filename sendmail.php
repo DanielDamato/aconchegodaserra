@@ -4,11 +4,11 @@ $remet 			= $_POST[remetente];
 $email_remet 	= $_POST[email_remet];
 $fone_remet 	= $_POST[fone_remet];
 $cel_remet 		= $_POST[cel_remet];
-$assunto 		= $_POST[assunto];
-$corpo 			= $_POST[corpo_mail];
+$assunto1 		= $_POST[assunto];
+$corpo1 			= $_POST[corpo_mail];
 
 
-$Vai 		= "Nome: $remet\n\nE-mail: $email_remet\n\nTelefone: $fone_remet\n\nCelular: $cel_remet\n\nAssunto: $assunto\n\nMensagem: $corpo\n";
+$Vai 		= "Nome: $remet\n\nE-mail: $email_remet\n\nTelefone: $fone_remet\n\nCelular: $cel_remet\n\nAssunto: $assunto1\n\nMensagem: $corpo1\n";
 
 require_once("PHPMailer/class.phpmailer.php");
 
@@ -23,7 +23,7 @@ function smtpmailer($para, $de, $de_nome, $assunto, $corpo) {
 	$mail->SMTPAuth = true;		// Autenticação ativada
 	$mail->SMTPSecure = 'ssl';	// SSL REQUERIDO pelo GMail
 	$mail->Host = 'smtp.gmail.com';	// SMTP utilizado
-	$mail->Port = 581;  		// A porta 587 deverá estar aberta em seu servidor
+	$mail->Port = 587;  		// A porta 587 deverá estar aberta em seu servidor
 	$mail->Username = GUSER;
 	$mail->Password = GPWD;
 	$mail->SetFrom($de, $de_nome);
