@@ -1,10 +1,10 @@
 <?php session_start();
-$remet 			= $_POST[remetente];
-$email_remet 	= $_POST[email_remet];
-$fone_remet 	= $_POST[fone_remet];
-$cel_remet 		= $_POST[cel_remet];
-$assunto1 		= $_POST[assunto];
-$corpo1 			= $_POST[corpo_mail];
+$remet 			= $_POST["remetente"];
+$email_remet 	= $_POST["email_remet"];
+$fone_remet 	= $_POST["fone_remet"];
+$cel_remet 		= $_POST["cel_remet"];
+$assunto1 		= $_POST["assunto"];
+$corpo1 			= $_POST["corpo_mail"];
 $Vai 		= "Nome: $remet\n\nE-mail: $email_remet\n\nTelefone: $fone_remet\n\nCelular: $cel_remet\n\nAssunto: $assunto1\n\nMensagem: $corpo1\n";
 
 
