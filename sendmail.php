@@ -14,7 +14,7 @@ $email = $_POST["email"];
 $mensagem = $_POST["mensagem"];
 */
 
-require_once("PHPMailerAutoload.php");
+require_once("PHPMailer\PHPMailerAutoload.php");
 
 
 $mail = new PHPMailer(); 
