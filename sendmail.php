@@ -1,6 +1,6 @@
 <?php session_start(); $nome = $_POST["nome"]; $email = $_POST["email"]; $mensagem = $_POST["mensagem"];
 
-require_once("PHPMailer\PHPMailerAutoload.php");
+require_once("../PHPMailer/PHPMailerAutoload.php");
 
 $mail = new PHPMailer(); $mail->isSMTP(); $mail->Host = "smtp.gmail.com"; $mail->Port = 587; $mail->SMTPSecure = "tls"; $mail->SMTPAuth = true; $mail->Username = "daniel.damato88@gmail.com"; $mail->Password = "daniel31";
 
