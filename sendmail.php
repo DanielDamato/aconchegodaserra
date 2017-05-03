@@ -1,50 +1,75 @@
 <?php
+/**
+ * This example shows settings to use when sending via Google's Gmail servers.
+ */
 
-$remet 			= $_POST[remetente];
-$email_remet 	= $_POST[email_remet];
-$fone_remet 	= $_POST[fone_remet];
-$cel_remet 		= $_POST[cel_remet];
-$assunto1 		= $_POST[assunto];
-$corpo1 			= $_POST[corpo_mail];
+//SMTP needs accurate times, and the PHP time zone MUST be set
+//This should be done in your php.ini, but this is how to do it if you don't have access to that
+date_default_timezone_set('Etc/UTC');
 
+require 'PHPMailer/PHPMailerAutoload.php';
 
-$Vai 		= "Nome: $remet\n\nE-mail: $email_remet\n\nTelefone: $fone_remet\n\nCelular: $cel_remet\n\nAssunto: $assunto1\n\nMensagem: $corpo1\n";
+//Create a new PHPMailer instance
+$mail = new PHPMailer;
 
-require_once("PHPMailer/class.phpmailer.php");
+//Tell PHPMailer to use SMTP
+$mail->isSMTP();
 
-define('GUSER', 'daniel.damato88@gmail.com');	// <-- Insira aqui o seu GMail
-define('GPWD', 'daniel31');		// <-- Insira aqui a senha do seu GMail
+//Enable SMTP debugging
+// 0 = off (for production use)
+// 1 = client messages
+// 2 = client and server messages
+$mail->SMTPDebug = 2;
 
-function smtpmailer($para, $de, $de_nome, $assunto, $corpo) { 
-	global $error;
-	$mail = new PHPMailer();
-	$mail->IsSMTP();		// Ativar SMTP
-	$mail->SMTPDebug = 1;		// Debugar: 1 = erros e mensagens, 2 = mensagens apenas
-	$mail->SMTPAuth = true;		// Autenticação ativada
-	$mail->SMTPSecure = 'ssl';	// SSL REQUERIDO pelo GMail
-	$mail->Host = 'smtp.gmail.com';	// SMTP utilizado
-	$mail->Port = 587;  		// A porta 587 deverá estar aberta em seu servidor
-	$mail->Username = GUSER;
-	$mail->Password = GPWD;
-	$mail->SetFrom($de, $de_nome);
-	$mail->Subject = $assunto;
-	$mail->Body = $corpo;
-	$mail->AddAddress($para);
-	if(!$mail->Send()) {
-		$error = 'Mail error: '.$mail->ErrorInfo; 
-		return false;
-	} else {
-		$error = 'Mensagem enviada!';
-		return true;
-	}}
+//Ask for HTML-friendly debug output
+$mail->Debugoutput = 'html';
 
-// Insira abaixo o email que irá receber a mensagem, o email que irá enviar (o mesmo da variável GUSER), 
-//o nome do email que envia a mensagem, o Assunto da mensagem e por último a variável com o corpo do email.
+//Set the hostname of the mail server
+$mail->Host = 'smtp.gmail.com';
+// use
+// $mail->Host = gethostbyname('smtp.gmail.com');
+// if your network does not support SMTP over IPv6
 
- if (smtpmailer('daniel.damato88@gmail.com', 'daniel.damato88@gmail.com', 'Site-ACC', 'Mensagem do Site', $Vai)) {
+//Set the SMTP port number - 587 for authenticated TLS, a.k.a. RFC4409 SMTP submission
+$mail->Port = 587;
 
-	Header("location:https://danieldamato.github.io/aconchegodaserra/"); // Redireciona para uma página de obrigado.
+//Set the encryption system to use - ssl (deprecated) or tls
+$mail->SMTPSecure = 'tls';
 
+//Whether to use SMTP authentication
+$mail->SMTPAuth = true;
+
+//Username to use for SMTP authentication - use full email address for gmail
+$mail->Username = "daniel.damato88@gmail.com";
+
+//Password to use for SMTP authentication
+$mail->Password = "daniel31";
+
+//Set who the message is to be sent from
+$mail->setFrom('ddamato@lemontech.com.br', 'Dani Damato');
+
+//Set an alternative reply-to address
+$mail->addReplyTo('daniel.damato88@gmail.com', 'First Last');
+
+//Set who the message is to be sent to
+$mail->addAddress('daniel.damato88@gmail.com', 'John Doe');
+
+//Set the subject line
+$mail->Subject = 'PHPMailer GMail SMTP test';
+
+//Read an HTML message body from an external file, convert referenced images to embedded,
+//convert HTML into a basic plain-text alternative body
+$mail->msgHTML(file_get_contents('contents.html'), dirname(__FILE__));
+
+//Replace the plain text body with one created manually
+$mail->AltBody = 'This is a plain-text message body';
+
+//Attach an image file
+$mail->addAttachment('PHPMailer/images/phpmailer_mini.png');
+
+//send the message, check for errors
+if (!$mail->send()) {
+    echo "Mailer Error: " . $mail->ErrorInfo;
+} else {
+    echo "Message sent!";
 }
-if (!empty($error)) echo $error;
-?>
