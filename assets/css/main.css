@@ -3816,10 +3816,21 @@
 	/*google maps popup*/
 .map-responsive{
     overflow:hidden;
-    padding-bottom:47%;
+    padding-bottom:42%;
     position:relative;
     height:0;
 }
+
+		/* aumentar mapa no móbile */
+	@media screen and (max-width: 480px) {
+		
+	.map-responsive{
+		padding-bottom:115%;
+	}
+	
+	}
+
+
 .map-responsive iframe{
     left:0;
     top:0;
@@ -3827,6 +3838,8 @@
     width:100%;
     position:absolute;
 }
+
+
 
 }
 	
